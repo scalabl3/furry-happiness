@@ -1,0 +1,22 @@
+apiVersion: apps/vl
+kind: Deployment
+metadata:
+  name: nginx-furry
+  labels:
+    app: furry-happiness
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+    app: furry-happiness
+  template:
+    metadata:
+      labels:
+        app: furry-happiness
+    spec:
+      containers:
+        name: furry-happiness
+        image: scalabl3/furry-happiness:latest
+        ports:
+          containerPort: 80
+          containerPort: 8081
