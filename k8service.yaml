@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: furry-happiness-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8081
+      name: nginx-port
+      targetPort: 80
+  selector:
+    app: furry-happiness-canary

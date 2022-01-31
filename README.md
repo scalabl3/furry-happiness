@@ -20,13 +20,25 @@ Pull image from DockerHub into local image repository
 
 ## K8 Commands
 
-Create Pod with Replicas (default Port 80)
+Locahost 8081 => 80 -- Create Pod with Replicas & Expose Service (YAML)
 
-```kubectl apply -f k8deploy.yaml```
+```kubectl apply -f k8deploy.yaml;kubectl apply -f k8service.yaml```
 
-For Localhost Expose Ports (Port 8081 => Container Port 80) with round robin load balancer
+Delete Pod & Service (YAML)
+
+```kubectl delete -f k8deploy.yaml;kubectl delete -f k8service.yaml```
+
+Expose Pod Service (YAML)
+
+```kubectl apply -f k8service.yaml```
+
+Manual Expose: For Localhost Expose Ports (Port 8081 => Container Port 80) with round robin load balancer
 
 ```kubectl expose -f k8deploy.yaml --port=8081 --target-port=80 --type=LoadBalancer```
+
+Manual Delete: For Localhost Expose Load Balancer
+
+``` kubectl delete service furry-happiness-canary```
 
 &nbsp;  
 
