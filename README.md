@@ -12,11 +12,7 @@ Pull image from DockerHub into local image repository
 
 ```docker pull scalabl3/furry-happiness```
 
-Run Docker Image (uses port 8082 => 80 from docker-compose.yaml)  
-
-```docker run scalabl3/furry-happiness```
-
-Alternative: (Git Clone) then Launch the image (uses port 8082 => 80 from docker-compose.yaml)  
+(Git Clone this repo) then Launch the image (uses port 8082 => 80 from docker-compose.yaml)  
 
 ```docker-compose up```
 
