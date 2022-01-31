@@ -4,6 +4,24 @@
 
 Simple nginx docker container serving static page and images
 
+&nbsp;  
+
+## Docker Commands
+
+Pull image from DockerHub into local image repository
+
+```docker pull scalabl3/furry-happiness```
+
+Run Docker Image (uses port 8082 => 80 from docker-compose.yaml)  
+
+```docker run scalabl3/furry-happiness```
+
+Alternative: (Git Clone) then Launch the image (uses port 8082 => 80 from docker-compose.yaml)  
+
+```docker-compose up```
+
+&nbsp;  
+
 ## K8 Commands
 
 Create Pod with Replicas (default Port 80)
@@ -14,6 +32,7 @@ For Localhost Expose Ports (Port 8081 => Container Port 80) with round robin loa
 
 ```kubectl expose -f k8deploy.yaml --port=8081 --target-port=80 --type=LoadBalancer```
 
+&nbsp;  
 
 ## Public DockerHub Image
 
