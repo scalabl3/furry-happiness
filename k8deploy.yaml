@@ -1,22 +1,33 @@
-apiVersion: apps/vl
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-furry
-  labels:
-    app: furry-happiness
+  name: furry-happiness-canary
+  namespace: default
 spec:
-  replicas: 2
+  replicas: 3
+  strategy:
+   type: RollingUpdate
+   rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
   selector:
     matchLabels:
-    app: furry-happiness
+      app: furry-happiness-canary
   template:
     metadata:
       labels:
-        app: furry-happiness
+        app: furry-happiness-canary
     spec:
       containers:
-        name: furry-happiness
-        image: scalabl3/furry-happiness:latest
+      - image: scalabl3/furry-happiness
+        imagePullPolicy: Always
+        name: furry
         ports:
-          containerPort: 80
-          containerPort: 8081
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
