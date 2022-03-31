@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: furry-happiness-canary
+  namespace: default
+spec:
+  replicas: 3
+  strategy:
+   type: RollingUpdate
+   rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: furry-happiness-canary
+  template:
+    metadata:
+      labels:
+        app: furry-happiness-canary
+    spec:
+      containers:
+      - image: scalabl3/furry-happiness
+        imagePullPolicy: Always
+        name: furry
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: furry-happiness-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8081
+      name: nginx-port
+      targetPort: 80
+  selector:
+    app: furry-happiness-canary
